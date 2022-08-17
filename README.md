@@ -16,6 +16,12 @@ This is an example of a functioning plugin which will allow you to place an imag
 
 There is currently no admin options or anything for this but I hope to develop this plugin further.
 
+Installation
+============
+1. Simply place the file 'frontend-image-upload.php' into a folder called 'frontend-image-upload' and zip it to create 'frontend-image-upload.zip' then go to your Wordpress Admin area for plugins and upload the zip file, then activate it to enable the new '[frontend_image_uploader]'.
+2. Place '[frontend_image_uploader]' shortcode, for example using the gutenburg shortcode block on a page where you would like the upload form to be shown (And save it!).
+3. That's it! Go to the page and test uploading an image and then check your media library in the Wordpress admin area where the image should now be shown.
+
 Notes
 =====
 I followed several guides in creating this plugin which can be found below for reference;
