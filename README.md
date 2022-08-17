@@ -15,3 +15,10 @@ I had an idea a while ago to make a HTML 5 frontend image upload plugin for Word
 This is an example of a functioning plugin which will allow you to place an image upload form on any page in Wordpress using a shortcode of '[frontend_image_uploader]' which will all a user to upload an image directly into the Wordpress media library from the front end.
 
 There is currently no admin options or anything for this but I hope to develop this plugin further.
+
+Notes
+=====
+I followed several guides in creating this plugin which can be found below for reference;
+https://www.dreamhost.com/blog/how-to-create-your-first-wordpress-plugin/
+https://rudrastyh.com/wordpress/how-to-add-images-to-media-library-from-uploaded-files-programmatically.html
+https://www.sitepoint.com/handling-post-requests-the-wordpress-way/
