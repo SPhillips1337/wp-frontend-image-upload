@@ -18,7 +18,7 @@ There are currently no admin options or anything for this but I hope to develop 
 
 Installation
 ============
-1. Simply place the file 'frontend-image-upload.php' into a folder called 'frontend-image-upload' and zip it to create 'frontend-image-upload.zip' then go to your Wordpress Admin area for plugins and upload the zip file, then activate it to enable the new '[frontend_image_uploader]'.
+1. Simply place the file 'frontend-image-upload.php' into a folder called 'frontend-image-upload' and zip it to create 'frontend-image-upload.zip' then go to your Wordpress Admin area for plugins and upload the zip file, and activate it to enable the new '[frontend_image_uploader]' shortcode.
 2. Place '[frontend_image_uploader]' shortcode, for example using the gutenburg shortcode block on a page where you would like the upload form to be shown (And save it!).
 3. That's it! Go to the page and test uploading an image and then check your media library in the Wordpress admin area where the image should now be shown.
 
