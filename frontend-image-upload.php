@@ -3,7 +3,7 @@
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://www.stephenphillips.co.uk/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.2
+* Version: 0.3
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 **/
@@ -25,6 +25,41 @@ function frontend_image_uploader_admin_init(){
 	echo '<strong>Version</strong>: 0.2<br>';
 	echo '<strong>Author</strong>: Stephen Phillips<br>';
 	echo '<strong>Author URI</strong>: <a href="https://www.stephenphillips.co.uk/" target="_blank">https://www.stephenphillips.co.uk/</a><br>';
+	echo '<hr>';
+	// usage
+	echo '<h2>Usage</h2>';
+	// add a simple text form to copy shortcode from
+	echo '<form action="">';
+	echo '<input type="text" id="shortcode" name="shortcode" value="[frontend-image-uploader]" size="50">';
+	echo '</form>';
+	echo '<br>Click the above text to copy the shortcode to your clipboard';
+	echo '<hr>';
+	// add javascript to copy shortcode to clipboard on click
+	echo '<script>';
+	echo 'document.getElementById("shortcode").onclick = function() {';
+	echo 'var copyText = document.getElementById("shortcode");';
+	echo 'copyText.select();';
+	echo 'document.execCommand("copy");';
+	echo 'alert("Copied the text: " + copyText.value);';
+	echo '}';
+	echo '</script>';
+	
+	//shortcode
+	echo '<h2>Shortcode</h2>';
+	echo '<p>The shortcode is used to display the image uploader on a page or post.</p>';
+	echo '<p>The shortcode is as follows:</p>';
+	echo '<pre>[frontend-image-uploader]</pre>';
+	echo '<p>The shortcode can be used on any page or post.</p>';
+	echo '<hr>';
+	// options
+	/*
+	echo '<h2>Options</h2>';
+	echo '<p>The options are used to change the behaviour of the image uploader.</p>';
+	echo '<p>The options are as follows:</p>';
+	echo '<pre>[frontend-image-uploader options="{ \'upload_text\': \'Upload Image\', \'delete_text\': \'Delete Image\', \'upload_button_class\': \'button button-primary\', \'delete_button_class\': \'button button-secondary\', \'image_class\': \'image-uploader-image\', \'image_id_class\': \'image-uploader-image-id\', \'image_url_class\': \'image-uploader-image-url\', \'image_delete_class\': \'image-uploader-image-delete\', \'image_upload_class\': \'image-uploader-image-upload\', \'image_upload_button_class\': \'button button-primary\', \'image_upload_button_text\': \'Upload Image\', \'image_delete_button_class\': \'button button-secondary\', \'image_delete_button_text\': \'Delete Image\' }]</pre>';
+	echo '<p>The options are as follows:</p>';
+	echo '<pre>upload_text: Upload Image<br>delete_text: Delete Image<br>upload_button_class: button button-primary<br>delete_button_class: button button-secondary<br>image_class: image-uploader-image<br>image_id_class: image-uploader-image-id<br>image_url_class: image-uploader-image-url<br>image_delete_class: image-uploader-image-delete<br>image_upload_class: image-uploader-image-upload<br>image_upload_button_class: button button-primary<br>image_upload_button_text: Upload Image<br>image_delete_button_class: button button-secondary<br>image_delete_button_text: Delete Image</pre>';
+	*/
 
 	// TODO: add configuration options and form label customization
 	/*
@@ -44,11 +79,14 @@ add_shortcode( 'frontend_image_uploader', 'frontend_image_uploader_callback' );
 
 // call back which renders the frontend form HTML
 function frontend_image_uploader_callback(){
+	// return the HTML 5 image upload form
 	return '<form action="'.esc_url( admin_url('admin-post.php')).'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="frontend_image_uploader_process_upload">
-	Your Photo: <input type="file" name="image_file" />
+	Your Photo: <input type="file" name="image_file" accept="image/*" />
 	<input type="submit" name="submit" value="Submit" />
 	</form>';
+
+	// NOTE: adding capture="camera" to the form will capture a photo from the camera only on mobile devices (Might offer as an option in admin panel)
 }
 
 // admin post action for frontend form which handles the image upload

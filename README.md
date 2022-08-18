@@ -16,6 +16,9 @@ This is an example of a functioning plugin which will allow you to place an imag
 
 There are currently no admin options or anything for this but I hope to develop this plugin further.
 
+Demo at https://www.stephenphillips.co.uk/demo
+Grab latest plugin files from https://www.stephenphillips.co.uk/demo/wp-frontend-image-upload.zip
+
 Installation
 ============
 1. Simply place the file 'frontend-image-upload.php' into a folder called 'frontend-image-upload' and zip it to create 'frontend-image-upload.zip' then go to your Wordpress Admin area for plugins and upload the zip file, and activate it to enable the new '[frontend_image_uploader]' shortcode.
@@ -26,15 +29,19 @@ Notes
 =====
 I followed several guides in creating this plugin which can be found below for reference;
 
-Version 0.1
+Version 0.1 - 17/08/2022
 ===========
 Initial dev of working frontend image upload plugin with shortcode
 https://www.dreamhost.com/blog/how-to-create-your-first-wordpress-plugin/
 https://rudrastyh.com/wordpress/how-to-add-images-to-media-library-from-uploaded-files-programmatically.html
 https://www.sitepoint.com/handling-post-requests-the-wordpress-way/
 
-Version 0.2
+Version 0.2 - 18/08/2022
 ===========
 Added an admin menu option and page to the plugin
 Added simple validation of upload type as image
 https://blog.idrsolutions.com/2014/06/wordpress-plugin-part-1/
+
+Version 0.3 - 18/08/2022
+===========
+Added option on admin page to show shortcode and click to copy it
