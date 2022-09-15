@@ -4,7 +4,7 @@ Simple HTML Frontend image upload plugin for wordpress using shortcode
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://github.com/SPhillips1337/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.3
+* Version: 0.4
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 
