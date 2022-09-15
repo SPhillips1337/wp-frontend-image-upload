@@ -4,7 +4,7 @@ Simple HTML Frontend image upload plugin for wordpress using shortcode
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://github.com/SPhillips1337/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.2
+* Version: 0.3
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 
@@ -14,7 +14,7 @@ I had an idea a while ago to make a HTML 5 frontend image upload plugin for Word
 
 This is an example of a functioning plugin which will allow you to place an image upload form on any page in Wordpress using a shortcode of '[frontend_image_uploader]' which will allow a user to upload an image directly into the Wordpress media library from the front end.
 
-There are currently no admin options or anything for this but I hope to develop this plugin further.
+I hope to develop this plugin further.
 
 Demo at https://www.stephenphillips.co.uk/demo
 Grab latest plugin files from https://www.stephenphillips.co.uk/demo/wp-frontend-image-upload.zip
@@ -45,3 +45,9 @@ https://blog.idrsolutions.com/2014/06/wordpress-plugin-part-1/
 Version 0.3 - 18/08/2022
 ===========
 Added option on admin page to show shortcode and click to copy it
+
+Version 0.4 - 15/09/2022
+===========
+Added a settings page to the plugin which shows under the WP Admin Settings menu
+
+Article describing how to create a simple settings page for a plugin can be found over at https://deliciousbrains.com/create-wordpress-plugin-settings-page/

@@ -3,7 +3,7 @@
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://www.stephenphillips.co.uk/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.3
+* Version: 0.4
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 **/
@@ -22,7 +22,7 @@ function frontend_image_uploader_admin_init(){
 	echo '<strong>Plugin Name</strong>: wp-frontend-image-upload<br>';
 	echo '<strong>Plugin URI</strong>: <a href="https://www.stephenphillips.co.uk/wp-frontend-image-upload" target="_blank">https://www.stephenphillips.co.uk/wp-frontend-image-upload</a><br>';
 	echo '<strong>Description</strong>: Simple HTML Frontend image upload plugin for wordpress using shortcode<br>';
-	echo '<strong>Version</strong>: 0.2<br>';
+	echo '<strong>Version</strong>: 0.4<br>';
 	echo '<strong>Author</strong>: Stephen Phillips<br>';
 	echo '<strong>Author URI</strong>: <a href="https://www.stephenphillips.co.uk/" target="_blank">https://www.stephenphillips.co.uk/</a><br>';
 	echo '<hr>';
@@ -51,28 +51,58 @@ function frontend_image_uploader_admin_init(){
 	echo '<pre>[frontend-image-uploader]</pre>';
 	echo '<p>The shortcode can be used on any page or post.</p>';
 	echo '<hr>';
-	// options
-	/*
-	echo '<h2>Options</h2>';
-	echo '<p>The options are used to change the behaviour of the image uploader.</p>';
-	echo '<p>The options are as follows:</p>';
-	echo '<pre>[frontend-image-uploader options="{ \'upload_text\': \'Upload Image\', \'delete_text\': \'Delete Image\', \'upload_button_class\': \'button button-primary\', \'delete_button_class\': \'button button-secondary\', \'image_class\': \'image-uploader-image\', \'image_id_class\': \'image-uploader-image-id\', \'image_url_class\': \'image-uploader-image-url\', \'image_delete_class\': \'image-uploader-image-delete\', \'image_upload_class\': \'image-uploader-image-upload\', \'image_upload_button_class\': \'button button-primary\', \'image_upload_button_text\': \'Upload Image\', \'image_delete_button_class\': \'button button-secondary\', \'image_delete_button_text\': \'Delete Image\' }]</pre>';
-	echo '<p>The options are as follows:</p>';
-	echo '<pre>upload_text: Upload Image<br>delete_text: Delete Image<br>upload_button_class: button button-primary<br>delete_button_class: button button-secondary<br>image_class: image-uploader-image<br>image_id_class: image-uploader-image-id<br>image_url_class: image-uploader-image-url<br>image_delete_class: image-uploader-image-delete<br>image_upload_class: image-uploader-image-upload<br>image_upload_button_class: button button-primary<br>image_upload_button_text: Upload Image<br>image_delete_button_class: button button-secondary<br>image_delete_button_text: Delete Image</pre>';
-	*/
-
-	// TODO: add configuration options and form label customization
-	/*
-	echo '<hr>';
-	echo '<h2>Configuration</h2>';
-	echo '<form action="options.php" method="post">';
-	settings_fields('frontend_image_uploader_options');
-	do_settings_sections('frontend_image_uploader_options');
-	submit_button();
-	echo '</form>';
-	*/
 
 }
+/************************************************************************** */
+// TODO: add configuration options and form label customization
+function frontend_image_uploader_add_settings_page() {
+    add_options_page( 'Frontend Image Uploader', 'Frontend Image Uploader', 'manage_options', 'frontend_image_uploader_settings', 'frontend_image_uploader_plugin_settings_page' );
+}
+add_action( 'admin_menu', 'frontend_image_uploader_add_settings_page' );
+
+function frontend_image_uploader_plugin_settings_page() {
+    ?>
+    <h2>Frontend Image Uploader Settings</h2>
+    <form action="options.php" method="post">
+        <?php 
+        settings_fields( 'frontend_image_uploader_plugin_options' );
+        do_settings_sections( 'frontend_image_uploader_plugin' ); ?>
+        <input name="submit" class="button button-primary" type="submit" value="<?php esc_attr_e( 'Save' ); ?>" />
+    </form>
+    <?php
+}
+
+function frontend_image_uploader_register_settings() {
+    register_setting( 'frontend_image_uploader_plugin_options', 'frontend_image_uploader_plugin_options', 'frontend_image_uploader_plugin_options_validate' );
+    add_settings_section( 'configuration_settings', 'Configuration', 'frontend_image_uploader_section_text', 'frontend_image_uploader_plugin' );
+
+    add_settings_field( 'frontend_image_uploader_setting_text_label', 'Text Label', 'frontend_image_uploader_setting_text_label', 'frontend_image_uploader_plugin', 'configuration_settings' );
+
+}
+add_action( 'admin_init', 'frontend_image_uploader_register_settings' );
+
+function frontend_image_uploader_plugin_options_validate( $input ) {
+	/*
+    $newinput['api_key'] = trim( $input['api_key'] );
+    if ( ! preg_match( '/^[a-z0-9]{32}$/i', $newinput['api_key'] ) ) {
+        $newinput['api_key'] = '';
+    }
+
+    return $newinput;*/
+	return $input;
+
+}
+
+function frontend_image_uploader_section_text() {
+    echo '<p>Here you can set all the options for using the plugin</p>';
+}
+
+function frontend_image_uploader_setting_text_label() {
+    $options = get_option( 'frontend_image_uploader_plugin_options' );
+    echo "<input id='frontend_image_uploader_setting_text_label' name='frontend_image_uploader_plugin_options[text_label]' type='text' value='" . esc_attr( $options['text_label'] ) . "' />";
+}
+
+/************************************************************************* */
 
 // create shortcode to place the frontend form
 add_shortcode( 'frontend_image_uploader', 'frontend_image_uploader_callback' );
