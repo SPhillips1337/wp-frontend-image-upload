@@ -54,7 +54,7 @@ function frontend_image_uploader_admin_init(){
 
 }
 /************************************************************************** */
-// TODO: add configuration options and form label customization
+// configuration options and form label customization
 function frontend_image_uploader_add_settings_page() {
     add_options_page( 'Frontend Image Uploader', 'Frontend Image Uploader', 'manage_options', 'frontend_image_uploader_settings', 'frontend_image_uploader_plugin_settings_page' );
 }
