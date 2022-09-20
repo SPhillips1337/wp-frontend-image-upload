@@ -3,7 +3,7 @@
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://www.stephenphillips.co.uk/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.4
+* Version: 0.5
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 **/
@@ -22,7 +22,7 @@ function frontend_image_uploader_admin_init(){
 	echo '<strong>Plugin Name</strong>: wp-frontend-image-upload<br>';
 	echo '<strong>Plugin URI</strong>: <a href="https://www.stephenphillips.co.uk/wp-frontend-image-upload" target="_blank">https://www.stephenphillips.co.uk/wp-frontend-image-upload</a><br>';
 	echo '<strong>Description</strong>: Simple HTML Frontend image upload plugin for wordpress using shortcode<br>';
-	echo '<strong>Version</strong>: 0.4<br>';
+	echo '<strong>Version</strong>: 0.5<br>';
 	echo '<strong>Author</strong>: Stephen Phillips<br>';
 	echo '<strong>Author URI</strong>: <a href="https://www.stephenphillips.co.uk/" target="_blank">https://www.stephenphillips.co.uk/</a><br>';
 	echo '<hr>';
@@ -77,6 +77,7 @@ function frontend_image_uploader_register_settings() {
     add_settings_section( 'configuration_settings', 'Configuration', 'frontend_image_uploader_section_text', 'frontend_image_uploader_plugin' );
 
     add_settings_field( 'frontend_image_uploader_setting_text_label', 'Text Label', 'frontend_image_uploader_setting_text_label', 'frontend_image_uploader_plugin', 'configuration_settings' );
+	add_settings_field( 'frontend_image_uploader_setting_button_text', 'Button Text', 'frontend_image_uploader_setting_button_text', 'frontend_image_uploader_plugin', 'configuration_settings' );
 
 }
 add_action( 'admin_init', 'frontend_image_uploader_register_settings' );
@@ -98,8 +99,19 @@ function frontend_image_uploader_section_text() {
 }
 
 function frontend_image_uploader_setting_text_label() {
+	// fetch our plugin options
     $options = get_option( 'frontend_image_uploader_plugin_options' );
-    echo "<input id='frontend_image_uploader_setting_text_label' name='frontend_image_uploader_plugin_options[text_label]' type='text' value='" . esc_attr( $options['text_label'] ) . "' />";
+	// assign plugin option for text label
+	$text_label = ($options['text_label']=="") ? 'Your Photo' : $options['text_label'];
+    echo "<input id='frontend_image_uploader_setting_text_label' name='frontend_image_uploader_plugin_options[text_label]' type='text' value='" . $text_label . "' placeholder='Your Photo' />";
+}
+
+function frontend_image_uploader_setting_button_text() {
+	// fetch our plugin options
+    $options = get_option( 'frontend_image_uploader_plugin_options' );
+	// assign plugin option for button text
+	$button_text = ($options['button_text']=="") ? 'Submit' : $options['button_text'];
+    echo "<input id='frontend_image_uploader_setting_button_text' name='frontend_image_uploader_plugin_options[button_text]' type='text' value='" . $button_text . "' placeholder='Submit' />";
 }
 
 /************************************************************************* */
@@ -109,11 +121,17 @@ add_shortcode( 'frontend_image_uploader', 'frontend_image_uploader_callback' );
 
 // call back which renders the frontend form HTML
 function frontend_image_uploader_callback(){
+	// fetch our plugin options
+    $options = get_option( 'frontend_image_uploader_plugin_options' );
+	// assign plugin option for text label
+	$text_label = ($options['text_label']=="") ? 'Your Photo' : $options['text_label'];
+	// assign plugin option for button text
+	$button_text = ($options['button_text']=="") ? 'Submit' : $options['button_text'];	
 	// return the HTML 5 image upload form
 	return '<form action="'.esc_url( admin_url('admin-post.php')).'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="frontend_image_uploader_process_upload">
-	Your Photo: <input type="file" name="image_file" accept="image/*" />
-	<input type="submit" name="submit" value="Submit" />
+	'. $text_label .': <input type="file" name="image_file" accept="image/*" />
+	<input type="submit" name="submit" value="'. $button_text . '" />
 	</form>';
 
 	// NOTE: adding capture="camera" to the form will capture a photo from the camera only on mobile devices (Might offer as an option in admin panel)

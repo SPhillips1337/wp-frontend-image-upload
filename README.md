@@ -4,7 +4,7 @@ Simple HTML Frontend image upload plugin for wordpress using shortcode
 * Plugin Name: wp-frontend-image-upload
 * Plugin URI: https://github.com/SPhillips1337/wp-frontend-image-upload
 * Description: Simple HTML Frontend image upload plugin for wordpress using shortcode
-* Version: 0.4
+* Version: 0.5
 * Author: Stephen Phillips
 * Author URI: https://www.stephenphillips.co.uk/
 
@@ -51,3 +51,7 @@ Version 0.4 - 15/09/2022
 Added a settings page to the plugin which shows under the WP Admin Settings menu
 
 Article describing how to create a simple settings page for a plugin can be found over at https://deliciousbrains.com/create-wordpress-plugin-settings-page/
+
+Version 0.5 - 20/09/2022
+===========
+Added code to show the settings on the front end image upload form if set (with default values) and also added a new option to set the default button text as well.
